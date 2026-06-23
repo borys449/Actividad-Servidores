@@ -11,5 +11,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\Actividad-Servidores.ServiceDefaults\Actividad-Servidores.ServiceDefaults.csproj" />
   </ItemGroup>
 </Project>
