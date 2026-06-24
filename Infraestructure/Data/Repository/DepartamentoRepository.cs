@@ -4,26 +4,35 @@ namespace Infrastructure.Data.Repository;
 
 public class DepartamentoRepository : IDepartamentoRepository
 {
-    public Task AddAsync(Departamentos departamento)
+    public DepartamentoRepository(ApplicationContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
     }
-    public Task DeleteAsync(int id)
+    public async Task AddAsync(Departamentos departamento)
     {
-        throw new NotImplementedException();
+        _context.Departamentos.Add(departamento);
+        await _context.SaveChangesAsync();
+    }
+    public async Task DeleteAsync(int id)
+    {
+        var departamento = await _context.Departamentos.FindAsync(id);
+        if (departamento != null)
+        {
+            _context.Departamentos.Remove(departamento);
+            await _context.SaveChangesAsync();
+        }
     }
     public async Task<List<Departamentos>> GetAllAsync()
     {
-        return await Task.FromResult
-        (new List<Departamentos>
-        {
-            new () { Id = 1, Nombre = "Recursos Humanos" },
-            new () { Id = 2, Nombre = "Finanzas" },
-            new () { Id = 3, Nombre = "Tecnología" }
-        });
+        return await _context.Departamentos.ToListAsync();
     }
-    public Task<Departamentos?> GetByIdAsync(int id)
+    public async Task<Departamentos?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Departamentos.FindAsync(id);
+    }
+    public async Task UpdateAsync(Departamentos departamento)
+    {
+        _context.Departamentos.Update(departamento);
+        await _context.SaveChangesAsync();
     }
 }
