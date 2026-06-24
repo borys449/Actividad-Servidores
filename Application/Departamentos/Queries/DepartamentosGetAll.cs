@@ -1,4 +1,5 @@
 namespace Application.Departamentos.Queries;
+using Domain;
 
 public interface IDepartamentoGetAll
 {
